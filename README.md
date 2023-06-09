@@ -1,87 +1,18 @@
-# 
 
-## Model
-www.msaez.io/#/storming/377c931dd7a5819d06870323f995095d
+# 내 도메인 주제 및 시나리오(요구사항)
 
-## Before Running Services
-### Make sure there is a Kafka server running
-```
-cd kafka
-docker-compose up
-```
-- Check the Kafka messages:
-```
-cd kafka
-docker-compose exec -it kafka /bin/bash
-cd /bin
-./kafka-console-consumer --bootstrap-server localhost:9092 --topic
-```
+기본 쇼핑몰 모델
 
-## Run the backend micro-services
-See the README.md files inside the each microservices directory:
+요구사항
+1. 고객이 주문한다
+2. 배송이 시작된다
+3. 재고에서 개수가 차감된다
 
-- order
-- delivery
-- product
+#  이벤트스토밍 모델
+![image](https://github.com/23911021/shopmall/assets/127590941/a19d54cf-409e-4f79-8905-df9b6b68ee04)
 
+#  도커허브 빌드
+![image](https://github.com/23911021/shopmall/assets/127590941/192ee3e6-c05c-4be9-85c7-ceb21d39a190)
 
-## Run API Gateway (Spring Gateway)
-```
-cd gateway
-mvn spring-boot:run
-```
-
-## Test by API
-- order
-```
- http :8088/orders id="id" productName="productName" productId="productId" customerId="customerId" qty="qty" 
-```
-- delivery
-```
- http :8088/deliveries id="id" orderId="orderId" productName="productName" productId="productId" customerId="customerId" qty="qty" status="status" 
-```
-- product
-```
- http :8088/stocks id="id" productName="productName" stock="stock" 
-```
-
-
-## Run the frontend
-```
-cd frontend
-npm i
-npm run serve
-```
-
-## Test by UI
-Open a browser to localhost:8088
-
-## Required Utilities
-
-- httpie (alternative for curl / POSTMAN) and network utils
-```
-sudo apt-get update
-sudo apt-get install net-tools
-sudo apt install iputils-ping
-pip install httpie
-```
-
-- kubernetes utilities (kubectl)
-```
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-```
-
-- aws cli (aws)
-```
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-```
-
-- eksctl 
-```
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-sudo mv /tmp/eksctl /usr/local/bin
-```
-
+#  쿠버네티스 배포
+![image](https://github.com/23911021/shopmall/assets/127590941/683b7375-b116-455b-af4b-4dbfbdabdef3)
